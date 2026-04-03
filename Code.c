@@ -22,7 +22,8 @@ void addNode(int x, int y) {
 
 void removeTail() {
     struct Node* temp = head;
-    if (!temp || !temp->next) return;
+    if (!temp || !temp->next) 
+        return;
 
     while (temp->next->next)
         temp = temp->next;
