@@ -5,7 +5,7 @@
 #include <time.h>
 
 
-struct Node {
+struct   Node {
     int x, y;
     struct Node* next;
 };
@@ -31,3 +31,97 @@ void removeTail() {
     temp->next = NULL;
 }
 
+enum Direction{UP,DOWN,LEFT,RIGHT};
+int direction = RIGHT;
+
+void gameStart()
+{
+
+    addNode(12,12);
+    struct Node* temp = head;
+        while(temp!=NULL)
+        {
+            printf(" < %d , %d > ",temp->x,temp->y);
+            temp=temp->next;
+        }
+        printf("\n");
+
+    for(int i=0; i<2; i++)
+    {
+       
+        
+        int newX=head->x+1;
+        int newY=head->y;
+
+        addNode(newX,newY);
+        Sleep(500);
+
+        system("cls");
+        struct Node* temp = head;
+        while(temp!=NULL)
+        {
+            printf(" < %d , %d > ",temp->x,temp->y);
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+
+    while(1)
+    {
+        int newX=head->x;
+        int newY=head->y;
+
+        if (kbhit())
+        {
+            char ch=getch();
+
+            if(ch=='w' && direction!=DOWN)
+            direction=UP;
+
+            else if(ch=='s' && direction!=UP)
+            direction=DOWN;
+
+            else if(ch=='a' && direction!=RIGHT)
+            direction=LEFT;
+
+            else if(ch=='d' && direction!=LEFT)
+            direction=RIGHT;
+
+        }
+
+        if(direction==UP)
+        newY--;
+
+        if(direction==DOWN)
+        newY++;
+
+        if(direction==LEFT)
+        newX--;
+
+        if(direction==RIGHT)
+        newX++;
+
+        addNode(newX,newY);
+        removeTail();
+
+        system("cls");
+        struct Node* temp = head;
+        while(temp!=NULL)
+        {
+            printf(" < %d , %d > ",temp->x,temp->y);
+            temp=temp->next;
+        }
+        printf("\n");
+        Sleep(250);
+
+    }
+}
+
+int main()
+{
+
+    gameStart();
+
+
+    return 0;
+}
