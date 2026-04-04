@@ -30,6 +30,7 @@ void removeTail() {
 
     free(temp->next);
     temp->next = NULL;
+<<<<<<< Updated upstream
 }
 
 enum Direction{UP,DOWN,LEFT,RIGHT};
@@ -126,3 +127,6 @@ int main()
 
     return 0;
 }
+=======
+}
+>>>>>>> Stashed changes
