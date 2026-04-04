@@ -119,6 +119,16 @@ void drawboard()
     }
 }
 
+int checkCollision(int nx, int ny) {
+    if (nx <= 0 || nx >= WIDTH-1 || ny <= 0 || ny >= HEIGHT-1) return 1;  // Wall
+    struct Node *temp = head;
+    while (temp) {
+        if (temp->x == nx && temp->y == ny) return 1;  // Self
+        temp = temp->next;
+    }
+    return 0;
+}
+
 void gameStart()
 {
     generateFruit();
@@ -169,9 +179,13 @@ void gameStart()
         if (direction == RIGHT)
             newX++;
 
-        addNode(newX, newY);
-        removeTail();
-        drawboard();
+        if (checkCollision(newX, newY)) {
+    printf("\nGAME OVER! Score: %d\n", score);
+    break;
+}
+    addNode(newX, newY);
+    removeTail();
+    drawboard();
 
         // system("cls");
         // struct Node *temp = head;
