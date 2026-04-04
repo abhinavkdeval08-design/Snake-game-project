@@ -1,0 +1,13 @@
+
+
+Data structure Use
+-> Linked list (The snake is represented as a linked list of nodes (struct Node).)
+-> 
+
+
+About 'C' Code
+stdio.h -> standard input/output (for printf).
+conio.h -> console input functions (kbhit(), getch()).
+stdlib.h -> memory allocation (malloc, free).
+windows.h -> Sleep() and system("cls") for clearing screen.
+time.h -> random seeds or timing (not used yet in your code)
