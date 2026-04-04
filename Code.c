@@ -74,6 +74,11 @@ void generateFruit()
     fruitY = rand() % (HEIGHT - 2) + 1;
 }
 
+int isHead(int x, int y) {
+    if (head == NULL) return 0;
+    return (head->x == x && head->y == y);
+}
+
 void drawboard()
 {
     system("cls"); // clear screen each frame
@@ -97,12 +102,16 @@ void drawboard()
                 {
                     if (temp->x == col && temp->y == row)
                     {
-                        printf("O");
+                        if (isHead(col, row))
+                            printf("@");   // bada / distinct head
+                        else
+                            printf("o");   // chhota body
                         printed = 1;
                         break;
                     }
                     temp = temp->next;
                 }
+                
 
                 // Fruit
                 if (!printed && col == fruitX && row == fruitY)
