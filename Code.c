@@ -123,7 +123,7 @@ int checkCollision(int nx, int ny) {
     if (nx <= 0 || nx >= WIDTH-1 || ny <= 0 || ny >= HEIGHT-1) return 1;  // Wall
     struct Node *temp = head;
     while (temp) {
-        if (temp->x == nx && temp->y == ny) return 1;  // Self
+        if (temp->x == nx && temp->y == ny) return 1;  
         temp = temp->next;
     }
     return 0;
@@ -179,12 +179,20 @@ void gameStart()
         if (direction == RIGHT)
             newX++;
 
-        if (checkCollision(newX, newY)) {
-    printf("\nGAME OVER! Score: %d\n", score);
+    if (checkCollision(newX, newY)) {
+    printf("\nGAME OVER! Final Score: %d\n", score);
     break;
 }
+
+// FRUIT EATING LOGIC 
     addNode(newX, newY);
-    removeTail();
+    if (newX == fruitX && newY == fruitY) {
+    score += 10;           // +10 points!
+    generateFruit();       //fruit will generate immediately and random..
+    
+    } else {
+    removeTail();         
+    }
     drawboard();
 
         // system("cls");
