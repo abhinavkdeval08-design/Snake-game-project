@@ -91,7 +91,7 @@ void drawboard()
             // Border
             if (row == 0 || row == HEIGHT - 1 || col == 0 || col == WIDTH - 1)
             {
-                printf("#");
+                printf("##");
             }
             else
             {
@@ -103,9 +103,9 @@ void drawboard()
                     if (temp->x == col && temp->y == row)
                     {
                         if (isHead(col, row))
-                            printf("@");   // bada / distinct head
+                            printf("@ ");   // bada / distinct head
                         else
-                            printf("o");   // chhota body
+                            printf("o ");   // chhota body
                         printed = 1;
                         break;
                     }
@@ -116,12 +116,12 @@ void drawboard()
                 // Fruit
                 if (!printed && col == fruitX && row == fruitY)
                 {
-                    printf("F");
+                    printf("F ");
                     printed = 1;
                 }
 
                 if (!printed)
-                    printf(" ");
+                    printf("  ");
             }
         }
         printf("\n");
