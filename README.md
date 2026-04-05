@@ -32,3 +32,7 @@ y=1.....
 y=2.....
 
 therefore for UP movemnt of snake the inserted node should be y-- not y++.
+
+5.Theres a bug, the fruit can spawn on the snake itself.
+How do we solve it?
+We make a function isOnSnake to check if the spawned fruit is on snake or not if on the snake then generate again.

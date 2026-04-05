@@ -67,11 +67,28 @@ enum Direction
 };
 int direction = RIGHT;
 
+int isOnSnake(int x, int y)
+{
+    struct Node* temp = head;
+    while(temp)
+    {
+        if(temp->x==x && temp->y==y)
+        return 1;
+
+        temp=temp->next;
+    }
+
+    return 0;
+
+}
 
 void generateFruit()
 {
-    fruitX = rand() % (WIDTH - 2) + 1;
-    fruitY = rand() % (HEIGHT - 2) + 1;
+    do
+    {
+        fruitX = rand() % (WIDTH - 2) + 1;
+        fruitY = rand() % (HEIGHT - 2) + 1;
+    } while (isOnSnake(fruitX, fruitY));
 }
 
 int isHead(int x, int y) {
@@ -144,14 +161,14 @@ void gameStart()
     addNode(12, 12);
     struct Node *temp = head;
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         int newX = head->x + 1;
         int newY = head->y;
 
         addNode(newX, newY);
         drawboard();
-        Sleep(500);
+        Sleep(400);
     }
 
     while (1)
@@ -189,7 +206,7 @@ void gameStart()
             newX++;
 
     if (checkCollision(newX, newY)) {
-    printf("\nGAME OVER! Final Score: %d\n", score);
+    printf("\nGAME OVER!\nFinal Score: %d\n", score);
     break;
 }
 
