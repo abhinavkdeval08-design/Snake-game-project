@@ -6,7 +6,8 @@ Made By- <br> 1.Ritesh Singh  <br>
          <br>
          3.Abhinav Deval 
 
-
+<br>
+<p>
 Problem Statements...
 
 1.How do we make the snake?
@@ -33,6 +34,17 @@ y=2.....
 
 therefore for UP movemnt of snake the inserted node should be y-- not y++.
 
-5.Theres a bug, the fruit can spawn on the snake itself.
+5.How to make an beautyfull border
+we can use '|' and '--' ,'+' for giving beutyfull look
+
+6.How to make snake speed equivalent for Horizontal and vertical direction?
+=>The Speed are same for both but due to represntion the spacing b/w horizontal letter and vertical are differnt so it looks like it have greater speed in vertical
+direction.so for fixing that I increase the horizontal spacing.->by using '--' at printing timing.
+
+7.how to spawn fruit at random position but inside the boundary??
+at first we choose the random function for geting an number then we take modulo of width and height with that number so modulo give value inside that boundary.
+
+8.Theres a bug, the fruit can spawn on the snake itself.
 How do we solve it?
 We make a function isOnSnake to check if the spawned fruit is on snake or not if on the snake then generate again.
+</p>
