@@ -12,8 +12,8 @@ void generateFruit();
 void drawboard();
 
 // defined height and wedth
-#define WIDTH 30
-#define HEIGHT 15
+#define WIDTH 40
+#define HEIGHT 20
 
 // Globaly decleared variable
 int fruitX, fruitY;
@@ -34,7 +34,6 @@ int main()
     gameStart();
     return 0;
 }
-
 
 void addNode(int x, int y)
 {
@@ -69,17 +68,16 @@ int direction = RIGHT;
 
 int isOnSnake(int x, int y)
 {
-    struct Node* temp = head;
-    while(temp)
+    struct Node *temp = head;
+    while (temp)
     {
-        if(temp->x==x && temp->y==y)
-        return 1;
+        if (temp->x == x && temp->y == y)
+            return 1;
 
-        temp=temp->next;
+        temp = temp->next;
     }
 
     return 0;
-
 }
 
 void generateFruit()
@@ -91,8 +89,10 @@ void generateFruit()
     } while (isOnSnake(fruitX, fruitY));
 }
 
-int isHead(int x, int y) {
-    if (head == NULL) return 0;
+int isHead(int x, int y)
+{
+    if (head == NULL)
+        return 0;
     return (head->x == x && head->y == y);
 }
 
@@ -106,10 +106,19 @@ void drawboard()
         for (int col = 0; col < WIDTH; col++) // columns
         {
             // Border
-            if (row == 0 || row == HEIGHT - 1 || col == 0 || col == WIDTH - 1)
-            {
-                printf("##");
-            }
+            if (row == 0 && col == 0)
+                printf("+");
+            else if (row == 0 && col == WIDTH - 1)
+                printf("+");
+            else if (row == HEIGHT - 1 && col == 0)
+                printf("+");
+            else if (row == HEIGHT - 1 && col == WIDTH - 1)
+                printf("+");
+            else if (row == 0 || row == HEIGHT - 1)
+                printf("--");
+            else if (col == 0 || col == WIDTH - 1)
+                printf("|");
+
             else
             {
                 // Snake check
@@ -120,20 +129,20 @@ void drawboard()
                     if (temp->x == col && temp->y == row)
                     {
                         if (isHead(col, row))
-                            printf("@ ");   // bada / distinct head
+                            printf("@ "); // bada / distinct head
                         else
-                            printf("o ");   // chhota body
+                            printf("o "); // chhota body
                         printed = 1;
                         break;
                     }
                     temp = temp->next;
                 }
-                
 
                 // Fruit
                 if (!printed && col == fruitX && row == fruitY)
                 {
-                    printf("F ");
+                    // printf("F ");
+                    printf("* ");
                     printed = 1;
                 }
 
@@ -145,11 +154,15 @@ void drawboard()
     }
 }
 
-int checkCollision(int nx, int ny) {
-    if (nx <= 0 || nx >= WIDTH-1 || ny <= 0 || ny >= HEIGHT-1) return 1;  // Wall
+int checkCollision(int nx, int ny)
+{
+    if (nx <= 0 || nx >= WIDTH - 1 || ny <= 0 || ny >= HEIGHT - 1)
+        return 1; // Wall
     struct Node *temp = head;
-    while (temp) {
-        if (temp->x == nx && temp->y == ny) return 1;  
+    while (temp)
+    {
+        if (temp->x == nx && temp->y == ny)
+            return 1;
         temp = temp->next;
     }
     return 0;
@@ -205,21 +218,24 @@ void gameStart()
         if (direction == RIGHT)
             newX++;
 
-    if (checkCollision(newX, newY)) {
-    printf("\nGAME OVER!\nFinal Score: %d\n", score);
-    break;
-}
+        if (checkCollision(newX, newY))
+        {
+            printf("\nGAME OVER!\nFinal Score: %d\n", score);
+            break;
+        }
 
-// FRUIT EATING LOGIC 
-    addNode(newX, newY);
-    if (newX == fruitX && newY == fruitY) {
-    score += 10;           // +10 points!
-    generateFruit();       //fruit will generate immediately and random..
-    
-    } else {
-    removeTail();         
-    }
-    drawboard();
+        // FRUIT EATING LOGIC
+        addNode(newX, newY);
+        if (newX == fruitX && newY == fruitY)
+        {
+            score += 10;     // +10 points!
+            generateFruit(); // fruit will generate immediately and random..
+        }
+        else
+        {
+            removeTail();
+        }
+        drawboard();
 
         // system("cls");
         // struct Node *temp = head;
