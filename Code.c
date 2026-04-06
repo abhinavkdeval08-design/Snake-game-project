@@ -15,6 +15,9 @@ void drawboard();
 #define WIDTH 40
 #define HEIGHT 20
 
+int SPEED = 350;
+int DEC = 50;
+
 // Globaly decleared variable
 int fruitX, fruitY;
 int score = 0;
@@ -230,6 +233,7 @@ void gameStart()
         {
             score += 10;     // +10 points!
             generateFruit(); // fruit will generate immediately and random..
+           if (SPEED != 100)  SPEED = SPEED - DEC;
         }
         else
         {
@@ -247,6 +251,6 @@ void gameStart()
         //     temp = temp->next;
         // }
         // printf("\n");
-        Sleep(250);
+        Sleep(SPEED);
     }
 }
