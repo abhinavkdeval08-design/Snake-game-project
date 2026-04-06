@@ -155,6 +155,11 @@ void drawboard()
         }
         printf("\n");
     }
+
+    printf("Your Score: %d\n",score);
+    printf("Controls: w, a, s, d\n");
+    printf("Press P to pause.\n\n");
+
 }
 
 int checkCollision(int nx, int ny)
@@ -173,6 +178,7 @@ int checkCollision(int nx, int ny)
 
 void gameStart()
 {
+    int pause = 0;
     generateFruit();
     addNode(12, 12);
     struct Node *temp = head;
@@ -196,6 +202,9 @@ void gameStart()
         {
             char ch = getch();
 
+            if(ch == 'p')
+            pause = !pause;
+
             if (ch == 'w' && direction != DOWN)
                 direction = UP;
 
@@ -208,6 +217,14 @@ void gameStart()
             else if (ch == 'd' && direction != LEFT)
                 direction = RIGHT;
         }
+
+    if (pause)
+    {
+        drawboard();
+        printf("GAME PAUSED - Press P to resume\n");
+        Sleep(200);
+        continue;
+    }
 
         if (direction == UP)
             newY--;
@@ -224,6 +241,35 @@ void gameStart()
         if (checkCollision(newX, newY))
         {
             printf("\nGAME OVER!\nFinal Score: %d\n", score);
+            printf("Press R to restart or press anykey to exit.\n\n");
+            char a =getch();
+            if(a == 'r')
+            {
+                struct Node* temp;
+                while(head != NULL)
+                {
+                    temp=head;
+                    head=head->next;
+                    free(temp);
+                }
+                score=0;
+                direction = RIGHT;
+                pause = 0;
+                SPEED = 350;
+                generateFruit();
+                addNode(12, 12);
+                for (int i = 0; i < 3; i++)
+                {
+                    int newX = head->x + 1;
+                    int newY = head->y;
+
+                    addNode(newX, newY);
+                    drawboard();
+                    Sleep(400);
+                }
+                continue;
+            }
+            else
             break;
         }
 
@@ -240,17 +286,6 @@ void gameStart()
             removeTail();
         }
         drawboard();
-
-        // system("cls");
-        // struct Node *temp = head;
-        // while (temp != NULL)
-        // {
-        //     // system("cls"); // clear screen each frame
-        //    // drawboard();
-        //     // printf(" < %d , %d > ",temp->x,temp->y);
-        //     temp = temp->next;
-        // }
-        // printf("\n");
         Sleep(SPEED);
     }
 }

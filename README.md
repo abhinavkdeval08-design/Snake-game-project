@@ -48,3 +48,15 @@ at first we choose the random function for geting an number then we take modulo 
 How do we solve it?
 We make a function isOnSnake to check if the spawned fruit is on snake or not if on the snake then generate again.
 </p>
+
+9.The snake's speed is constant, to make the game fun we need to keep it constantly increasing.
+We can do it by changing Sleep function parameter in a manner we wish.
+
+10.For now we have made so that the snakes movement speed is increasing at a constant level but for is to be better, we should increase it exponentially with respect to score.
+We can easily do it by introducing a function library i.e. conio.h and use its exponential functions.
+
+11.Now we can add the pause UI feature.
+We can usually do it by simply using the application od do-while loop.
+
+12.But Adding the feature of restart needed special attention.
+While implementing the feature of restart we need to restart the start game loop and also reset various parameters like speed, score, direction etc. and also reset the snake body.
