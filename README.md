@@ -47,7 +47,6 @@ at first we choose the random function for geting an number then we take modulo 
 8.Theres a bug, the fruit can spawn on the snake itself.
 How do we solve it?
 We make a function isOnSnake to check if the spawned fruit is on snake or not if on the snake then generate again.
-</p>
 
 9.The snake's speed is constant, to make the game fun we need to keep it constantly increasing.
 We can do it by changing Sleep function parameter in a manner we wish.
