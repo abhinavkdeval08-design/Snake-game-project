@@ -12,7 +12,7 @@ void generateFruit();
 void drawboard();
 
 // defined height and wedth
-#define WIDTH 40
+#define WIDTH 40 
 #define HEIGHT 20
 
 int SPEED = 350;
