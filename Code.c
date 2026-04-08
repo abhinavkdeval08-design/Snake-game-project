@@ -241,7 +241,7 @@ void gameStart()
         if (checkCollision(newX, newY))
         {
             printf("\nGAME OVER!\nFinal Score: %d\n", score);
-            printf("Press R to restart or press anykey to exit.\n\n");
+            printf("Press R to restart or press E to exit.\n\n");
             char a =getch();
             if(a == 'r')
             {
@@ -269,7 +269,7 @@ void gameStart()
                 }
                 continue;
             }
-            else
+            else if(a=='e')
             break;
         }
 
