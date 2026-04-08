@@ -16,7 +16,7 @@ void drawboard();
 #define HEIGHT 20
 
 int SPEED = 350;
-int DEC = 50;
+int DEC = 10;
 
 // Globaly decleared variable
 int fruitX, fruitY;
@@ -33,7 +33,6 @@ struct Node *head = NULL;
 
 int main()
 {
-    srand((unsigned)time(NULL)); // seed random once
     gameStart();
     return 0;
 }
@@ -241,7 +240,7 @@ void gameStart()
         if (checkCollision(newX, newY))
         {
             printf("\nGAME OVER!\nFinal Score: %d\n", score);
-            printf("Press R to restart or press anykey to exit.\n\n");
+            printf("Press R to restart or press E to exit.\n\n");
             char a =getch();
             if(a == 'r')
             {
@@ -269,7 +268,7 @@ void gameStart()
                 }
                 continue;
             }
-            else
+            else if(a=='e')
             break;
         }
 
