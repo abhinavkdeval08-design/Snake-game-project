@@ -2,7 +2,7 @@
 
 Data structure Use
 -> Linked list (The snake is represented as a linked list of nodes (struct Node).)
--> 
+-> Queue (implemented in the snake's movement.)
 
 
 About 'C' Code

@@ -16,7 +16,7 @@ void drawboard();
 #define HEIGHT 20
 
 int SPEED = 350;
-int DEC = 50;
+int DEC = 10;
 
 // Globaly decleared variable
 int fruitX, fruitY;
@@ -33,7 +33,6 @@ struct Node *head = NULL;
 
 int main()
 {
-    srand((unsigned)time(NULL)); // seed random once
     gameStart();
     return 0;
 }
