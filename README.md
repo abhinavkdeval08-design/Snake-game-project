@@ -34,8 +34,8 @@ y=2.....
 
 therefore for UP movemnt of snake the inserted node should be y-- not y++.
 
-5.How to make an beautyfull border
-we can use '|' and '--' ,'+' for giving beutyfull look
+5.How to make an beautifull border
+we can use '|' and '--' ,'+' for giving beautifull look
 
 6.How to make snake speed equivalent for Horizontal and vertical direction?
 =>The Speed are same for both but due to represntion the spacing b/w horizontal letter and vertical are differnt so it looks like it have greater speed in vertical
