@@ -23,6 +23,12 @@ int DEC = 10; //inc speed
 int fruitX, fruitY;
 int score = 0;
 int highScore = 0;
+char fruitSymbols[] = {'$','%'};
+int fruitValues[]   = {10, 20};
+int fruitCount = 2;
+
+char currentFruitSymbol;
+int currentFruitValue;
 
 // structure define -> (Linklist)
 struct Node
@@ -103,6 +109,10 @@ void generateFruit()
         fruitX = rand() % (WIDTH - 2) + 1;
         fruitY = rand() % (HEIGHT - 2) + 1;
     } while (isOnSnake(fruitX, fruitY));
+
+    int idx = rand() % fruitCount;
+    currentFruitSymbol = fruitSymbols[idx];
+    currentFruitValue  = fruitValues[idx];
 }
 
 int isHead(int x, int y)
@@ -156,7 +166,7 @@ void drawboard()
                 if (!printed && col == fruitX && row == fruitY)
                 {
                     // printf("F ");
-                    printf("$ ");
+                    printf("%c ", currentFruitSymbol);
                     printed = 1;
                 }
 
@@ -402,7 +412,7 @@ void gameStart()
         addNode(newX, newY);
         if (newX == fruitX && newY == fruitY)
         {
-            score += 10;     // +10 points!
+            score += currentFruitValue;     // + points!
             generateFruit(); // fruit will generate immediately and random..
             if (SPEED > 120)  //less flickering if speed > 120
             SPEED -= DEC;
