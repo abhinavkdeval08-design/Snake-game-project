@@ -22,6 +22,7 @@ int DEC = 10; //inc speed
 // Globaly decleared variable
 int fruitX, fruitY;
 int score = 0;
+int highScore = 0;
 
 // structure define -> (Linklist)
 struct Node
@@ -35,7 +36,7 @@ struct Node *head = NULL;
 int main()
 {
     srand((unsigned)time(NULL));  // random fruit positions
-    menu();   // start from main menu instead of directly starting game
+    menu();   // start from main menu instead of starting game
     return 0;
 }
 
@@ -156,6 +157,7 @@ void drawboard()
     }
 
     printf("Your Score: %d\n",score);
+    printf("High Score: %d\n", highScore);
     printf("Controls: w, a, s, d\n");
     printf("Press P to pause.\n\n");
 
@@ -230,8 +232,10 @@ void menu() {
             } 
         else if (ch == '4') {
             clearScreen();
-            printf("Exiting!\nWait...\n");
+            printf("Exiting!\n");
             Sleep(500);
+            printf("Wait...\n");
+            Sleep(200);
             exit(0);
         }
     }
@@ -301,8 +305,10 @@ void gameStart()
             newX++;
 
         if (checkCollision(newX, newY))
-        {
+        {   if (score > highScore)
+            highScore = score;
             printf("\nGAME OVER!\nFinal Score: %d\n", score);
+            printf("High Score: %d\n", highScore);
             printf("Press R to restart or press E to exit.\n\n");
             char a =getch();
             if(a == 'r')
