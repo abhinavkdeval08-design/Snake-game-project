@@ -8,6 +8,21 @@ Made By- <br> 1.Ritesh Singh  <br>
 
 <br>
 <p>
+
+Data structure Use
+-> Linked list (The snake is represented as a linked list of nodes (struct Node).)
+-> Queue (implemented in the snake's movement.)
+-> Array (for implementing two different types of fruits)
+
+
+About 'C' Code
+stdio.h -> standard input/output (for printf).
+conio.h -> console input functions (kbhit(), getch()).
+stdlib.h -> memory allocation (malloc, free).
+windows.h -> Sleep() and system("cls") for clearing screen.
+time.h -> random seeds or timing (not used yet in your code)
+
+
 Problem Statements...
 
 1.How do we make the snake?
@@ -59,3 +74,12 @@ We can usually do it by simply using the application od do-while loop.
 
 12.But Adding the feature of restart needed special attention.
 While implementing the feature of restart we need to restart the start game loop and also reset various parameters like speed, score, direction etc. and also reset the snake body.
+
+14.Flickering of the output in the terminal was a problem for our game.
+We solved it by using printf("\033[H\033[J").
+
+13.We also wanted to add a highscore system.
+We simply did it by defining a universal variable and then adding the condition of it to check itslef with score to find the greater one and store it.
+
+14.We thought of making our game better by adding two different types of fruit.
+We simply did it by implementing array in our fruit system.
