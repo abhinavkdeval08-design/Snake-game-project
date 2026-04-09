@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <windows.h>
-#include <time.h>
+//#include <time.h>
 
 // Functions
 void addNode(int x, int y);
@@ -16,7 +16,7 @@ void drawboard();
 #define HEIGHT 20
 
 int SPEED = 350;
-int DEC = 10;
+int DEC = 10; //inc speed
 
 // Globaly decleared variable
 int fruitX, fruitY;
@@ -33,6 +33,14 @@ struct Node *head = NULL;
 
 int main()
 {
+ 
+    printf("\n=========================\n");
+    printf("        Snake Game       \n");
+    printf("=========================\n");
+    Sleep(900);
+    printf("Loading...");
+    Sleep(900);
+
     gameStart();
     return 0;
 }
@@ -100,8 +108,9 @@ int isHead(int x, int y)
 
 void drawboard()
 {
-    system("cls"); // clear screen each frame
+    printf("\033[H\033[J"); // clear screen each frame
     //=> We use cls for windows system
+    printf("\n\nSnake Game\n\n");
 
     for (int row = 0; row < HEIGHT; row++) // rows
     {
@@ -144,7 +153,7 @@ void drawboard()
                 if (!printed && col == fruitX && row == fruitY)
                 {
                     // printf("F ");
-                    printf("* ");
+                    printf("$ ");
                     printed = 1;
                 }
 
