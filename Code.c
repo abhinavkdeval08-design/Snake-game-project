@@ -35,15 +35,6 @@ struct Node *head = NULL;
 int main()
 {
     srand((unsigned)time(NULL));  // random fruit positions
-
-    printf("=================================\n");
-    printf("          SNAKE GAME\n");
-    printf("   2nd Sem Group Project\n");
-    printf("=================================\n\n");
-    Sleep(900);
-    printf("Loading...");
-    Sleep(900);
-
     menu();   // start from main menu instead of directly starting game
     return 0;
 }
@@ -113,8 +104,6 @@ void drawboard()
 {
     printf("\033[H");  // clear screen each frame
     //=> We use cls for windows system
-    printf("\n\nSnake Game\n\n");
-
     for (int row = 0; row < HEIGHT; row++) // rows
     {
         for (int col = 0; col < WIDTH; col++) // columns
@@ -129,10 +118,9 @@ void drawboard()
             else if (row == HEIGHT - 1 && col == WIDTH - 1)
                 printf("+");
             else if (row == 0 || row == HEIGHT - 1)
-                printf("--");
+            printf("--");  
             else if (col == 0 || col == WIDTH - 1)
-                printf("|");
-
+            printf("|");   
             else
             {
                 // Snake check
@@ -252,6 +240,7 @@ void menu() {
 void gameStart()
 {
     int pause = 0;
+    score = 0;     // new game from menu → fresh score
     generateFruit();
     addNode(12, 12);
     struct Node *temp = head;
@@ -342,8 +331,11 @@ void gameStart()
                 }
                 continue;
             }
-            else if(a=='e')
+            else if(a=='e'){
+            printf("Returning to main menu...\n");
+            Sleep(700);
             break;
+            }
         }
 
         // FRUIT EATING LOGIC
@@ -352,7 +344,8 @@ void gameStart()
         {
             score += 10;     // +10 points!
             generateFruit(); // fruit will generate immediately and random..
-           if (SPEED != 100)  SPEED = SPEED - DEC;
+            if (SPEED > 120)  //less flickering if speed > 120
+            SPEED -= DEC;
         }
         else
         {
