@@ -10,17 +10,19 @@ void removeTail();
 void gameStart();
 void generateFruit();
 void drawboard();
+void menu();
 
 // defined height and wedth
 #define WIDTH 40 
 #define HEIGHT 20
 
 int SPEED = 350;
-int DEC = 10;
+int DEC = 10; //inc speed
 
 // Globaly decleared variable
 int fruitX, fruitY;
 int score = 0;
+int highScore = 0;
 
 // structure define -> (Linklist)
 struct Node
@@ -33,7 +35,8 @@ struct Node *head = NULL;
 
 int main()
 {
-    gameStart();
+    srand((unsigned)time(NULL));  // random fruit positions
+    menu();   // start from main menu instead of starting game
     return 0;
 }
 
@@ -57,6 +60,17 @@ void removeTail()
 
     free(temp->next);
     temp->next = NULL;
+}
+
+void clearSnake()
+{
+    struct Node *temp;
+    while (head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
 
 enum Direction
@@ -100,9 +114,8 @@ int isHead(int x, int y)
 
 void drawboard()
 {
-    system("cls"); // clear screen each frame
+    printf("\033[H");  // clear screen each frame
     //=> We use cls for windows system
-
     for (int row = 0; row < HEIGHT; row++) // rows
     {
         for (int col = 0; col < WIDTH; col++) // columns
@@ -117,10 +130,9 @@ void drawboard()
             else if (row == HEIGHT - 1 && col == WIDTH - 1)
                 printf("+");
             else if (row == 0 || row == HEIGHT - 1)
-                printf("--");
+            printf("--");  
             else if (col == 0 || col == WIDTH - 1)
-                printf("|");
-
+            printf("|");   
             else
             {
                 // Snake check
@@ -144,7 +156,7 @@ void drawboard()
                 if (!printed && col == fruitX && row == fruitY)
                 {
                     // printf("F ");
-                    printf("* ");
+                    printf("$ ");
                     printed = 1;
                 }
 
@@ -156,6 +168,7 @@ void drawboard()
     }
 
     printf("Your Score: %d\n",score);
+    printf("High Score: %d\n", highScore);
     printf("Controls: w, a, s, d\n");
     printf("Press P to pause.\n\n");
 
@@ -175,9 +188,77 @@ int checkCollision(int nx, int ny)
     return 0;
 }
 
+void clearScreen() {
+    printf("\033[H\033[J");
+}
+
+void showTeam() {
+    clearScreen();
+    printf("============== TEAM =============\n\n");
+    printf("This is our Second Semester Group Project.\n\n");
+    printf("Made By:\n");
+    printf("1. Ritesh Singh\n");
+    printf("2. Pawan Asati\n");
+    printf("3. Abhinav Deval\n");
+    printf("\nPress any key to go back to menu...");
+    getch();
+}
+
+void showControls() {
+    clearScreen();
+    printf("======== CONTROLS ========\n\n");
+    printf("w : Move Up\n");
+    printf("s : Move Down\n");
+    printf("a : Move Left\n");
+    printf("d : Move Right\n");
+    printf("p : Pause / Resume\n");
+    printf("r : Restart (after game over)\n");
+    printf("e : Exit (after game over)\n");
+    printf("\nPress any key to go back to menu...");
+    getch();
+}
+
+void menu() {
+    while (1) {
+        clearScreen();
+        printf("=================================\n");
+        printf("          SNAKE GAME\n");
+        printf("=================================\n\n");
+        printf("1. About Team\n");
+        printf("2. Controls\n");
+        printf("3. Start Game\n");
+        printf("4. Exit\n\n");
+        printf("Select option (1-4): ");
+
+        char ch = getch();   
+
+        if (ch == '1') {
+            showTeam();
+        } 
+        else if (ch == '2') {
+            showControls();
+        } 
+        else if (ch == '3') {
+            gameStart();     // start the game
+            } 
+        else if (ch == '4') {
+            clearScreen();
+            printf("Exiting!\n");
+            Sleep(500);
+            printf("Wait...\n");
+            Sleep(200);
+            exit(0);
+        }
+    }
+}
+
 void gameStart()
 {
     int pause = 0;
+    clearSnake();
+    score = 0;     // new game from menu → fresh score
+    direction = RIGHT;   // new game always start from right..
+    SPEED = 350;   
     generateFruit();
     addNode(12, 12);
     struct Node *temp = head;
@@ -238,12 +319,14 @@ void gameStart()
             newX++;
 
         if (checkCollision(newX, newY))
-        {
+        {   if (score > highScore)
+            highScore = score;
             printf("\nGAME OVER!\nFinal Score: %d\n", score);
+            printf("High Score: %d\n", highScore);
             printf("Press R to restart or press E to exit.\n\n");
             char a =getch();
             if(a == 'r')
-            {
+            {   clearSnake();
                 struct Node* temp;
                 while(head != NULL)
                 {
@@ -268,8 +351,11 @@ void gameStart()
                 }
                 continue;
             }
-            else if(a=='e')
+            else if(a=='e'){
+            printf("Returning to main menu...\n");
+            Sleep(700);
             break;
+            }
         }
 
         // FRUIT EATING LOGIC
@@ -278,7 +364,8 @@ void gameStart()
         {
             score += 10;     // +10 points!
             generateFruit(); // fruit will generate immediately and random..
-           if (SPEED != 100)  SPEED = SPEED - DEC;
+            if (SPEED > 120)  //less flickering if speed > 120
+            SPEED -= DEC;
         }
         else
         {
