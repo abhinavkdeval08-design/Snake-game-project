@@ -62,6 +62,17 @@ void removeTail()
     temp->next = NULL;
 }
 
+void clearSnake()
+{
+    struct Node *temp;
+    while (head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
 enum Direction
 {
     UP,
@@ -244,7 +255,10 @@ void menu() {
 void gameStart()
 {
     int pause = 0;
+    clearSnake();
     score = 0;     // new game from menu → fresh score
+    direction = RIGHT;   // new game always start from right..
+    SPEED = 350;   
     generateFruit();
     addNode(12, 12);
     struct Node *temp = head;
@@ -312,7 +326,7 @@ void gameStart()
             printf("Press R to restart or press E to exit.\n\n");
             char a =getch();
             if(a == 'r')
-            {
+            {   clearSnake();
                 struct Node* temp;
                 while(head != NULL)
                 {
