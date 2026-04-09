@@ -24,7 +24,7 @@ int fruitX, fruitY;
 int score = 0;
 int highScore = 0;
 char fruitSymbols[] = {'$','%'};
-int fruitValues[]   = {10, 20};
+int fruitValues[]   = {20, 10};
 int fruitCount = 2;
 
 char currentFruitSymbol;
