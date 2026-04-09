@@ -16,14 +16,14 @@ void menu();
 #define WIDTH 40 
 #define HEIGHT 20
 
-int SPEED = 350;
+int SPEED = 270;
 int DEC = 10; //inc speed
 
 // Globaly decleared variable
 int fruitX, fruitY;
 int score = 0;
 int highScore = 0;
-char fruitSymbols[] = {'$','%'};
+char fruitSymbols[] = {'$','#'};
 int fruitValues[]   = {20, 10};
 int fruitCount = 2;
 
@@ -180,6 +180,7 @@ void drawboard()
     printf("Your Score: %d\n",score);
     printf("High Score: %d\n", highScore);
     printf("Controls: w, a, s, d\n");
+    printf("# means 10 points, $ means 20 points.\n");
     printf("Press P to pause.\n\n");
 
 }
@@ -308,7 +309,7 @@ void gameStart()
     clearSnake();
     score = 0;     // new game from menu → fresh score
     direction = RIGHT;   // new game always start from right..
-    SPEED = 350;   
+    SPEED = 270;   
     generateFruit();
     addNode(12, 12);
     struct Node *temp = head;
@@ -387,7 +388,7 @@ void gameStart()
                 score=0;
                 direction = RIGHT;
                 pause = 0;
-                SPEED = 350;
+                SPEED = 270;
                 generateFruit();
                 addNode(12, 12);
                 for (int i = 0; i < 3; i++)
