@@ -221,6 +221,19 @@ void showControls() {
 void menu() {
     while (1) {
         clearScreen();
+        printf("\n----Wellcome to Snake Game----\n");
+        Sleep(500);
+        printf("Loading");
+        Sleep(500);
+        printf(".");
+        Sleep(500);
+        printf(".");
+        Sleep(500);
+        printf(".");
+        Sleep(500);
+        printf(".\n");
+        Sleep(500);
+        clearScreen();
         printf("=================================\n");
         printf("          SNAKE GAME\n");
         printf("=================================\n\n");
@@ -243,10 +256,37 @@ void menu() {
             } 
         else if (ch == '4') {
             clearScreen();
-            printf("Exiting!\n");
+            printf("Exiting");
             Sleep(500);
-            printf("Wait...\n");
+            printf(".");
+            Sleep(500);
+            printf(".");
+            Sleep(500);
+            printf(".");
+            Sleep(500);
+            printf(".");
+            clearScreen();
+
+            printf("T");
             Sleep(200);
+            printf("H");
+            Sleep(200);
+            printf("A");
+            Sleep(200);
+            printf("N");
+            Sleep(200);
+            printf("K");
+            Sleep(200);
+            printf(" ");
+            Sleep(200);
+            printf("Y");
+            Sleep(200);
+            printf("O");
+            Sleep(200);
+            printf("U");
+            Sleep(200);
+            printf("!");
+            Sleep(1000);
             exit(0);
         }
     }
